@@ -1,25 +1,22 @@
 # ANIMAGENT 2000
 
-A retro-style animated landing page inspired by early 2000s web design aesthetics. This project features various classic web elements and animations that were popular during the early days of the internet.
+A retro-style animated landing page inspired by early 2000s web design. This project features:
 
-## Features
-
-- Matrix-style digital rain background animation
+- Matrix-style digital rain animation
 - Glowing neon text effects
 - Classic "Under Construction" banner
 - Rotating pixel borders
-- Bouncing marquee text
 - Visitor counter
 - Rainbow text animations
-- No-scroll single-page design
+- Bouncing marquee text
+
+## How to Run
+
+Simply open the `index.html` file in a modern web browser to experience the retro animations!
 
 ## Technologies Used
 
 - HTML5
-- CSS3 (Animations and Effects)
-- JavaScript (Canvas API for Matrix rain effect)
-- Classic Web Elements (marquee tag)
-
-## Live Demo
-
-Visit the GitHub Pages site to see the animation in action! 
+- CSS3 (Animations)
+- JavaScript (Canvas API)
+- No external dependencies required 
