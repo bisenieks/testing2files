@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANIMAGENT 2000</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #00ff00;
+            font-family: "Courier New", monospace;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+            width: 100%;
+        }
+
+        .title {
+            font-size: 4em;
+            margin: 20px;
+            text-shadow: 0 0 10px #0f0,
+                         0 0 20px #0f0,
+                         0 0 30px #0f0;
+            animation: glow 1s ease-in-out infinite alternate;
+        }
+
+        .construction {
+            margin: 20px;
+            font-size: 1.5em;
+            animation: blink 1s step-start infinite;
+        }
+
+        .pixel-border {
+            border: 2px solid #0f0;
+            padding: 20px;
+            margin: 20px;
+            position: relative;
+            animation: borderDance 4s linear infinite;
+        }
+
+        .matrix-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .counter {
+            font-family: "Digital", monospace;
+            font-size: 1.2em;
+            color: #ff0;
+            margin: 20px;
+        }
+
+        .visitor-text {
+            animation: rainbow 3s linear infinite;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px #0f0,
+                            0 0 20px #0f0,
+                            0 0 30px #0f0;
+            }
+            to {
+                text-shadow: 0 0 20px #0f0,
+                            0 0 30px #0f0,
+                            0 0 40px #0f0;
+            }
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        @keyframes borderDance {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes rainbow {
+            0% { color: red; }
+            16% { color: orange; }
+            32% { color: yellow; }
+            48% { color: green; }
+            64% { color: blue; }
+            80% { color: indigo; }
+            100% { color: violet; }
+        }
+
+        marquee {
+            margin: 20px 0;
+            color: #ff0;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <canvas class="matrix-rain" id="matrix"></canvas>
+    <div class="container">
+        <div class="title">ANIMAGENT 2000</div>
+        <div class="construction">🚧 UNDER CONSTRUCTION 🚧</div>
+        <div class="pixel-border">
+            <marquee behavior="alternate" scrollamount="3">Welcome to the COOLEST website on the INTERNET!</marquee>
+        </div>
+        <div class="counter">
+            <span class="visitor-text">Visitors:</span> 
+            <span id="visitorCount">000001</span>
+        </div>
+    </div>
+
+    <script>
+        // Matrix rain effect
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()';
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+
+        const drops = [];
+        for (let i = 0; i < columns; i++) {
+            drops[i] = 1;
+        }
+
+        function draw() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#0F0';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = characters.charAt(Math.floor(Math.random() * characters.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(draw, 33);
+
+        // Increment visitor counter randomly
+        setInterval(() => {
+            const counter = document.getElementById('visitorCount');
+            const currentCount = parseInt(counter.textContent);
+            counter.textContent = String(currentCount + 1).padStart(6, '0');
+        }, 5000);
+    </script>
+</body>
+</html> 
